@@ -8,6 +8,17 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v2
+            - name: Cache node modules
+              uses: actions/cache@v1
+              env:
+                  cache-name: cache-composer-modules
+              with:
+                  path: ./vendor
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-build-${{ env.cache-name }}-
+                      ${{ runner.os }}-build-
+                      ${{ runner.os }}-
             - name: Composer install
               uses: docker://composer:1.9.1
               with:
