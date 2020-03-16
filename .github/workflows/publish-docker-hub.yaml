@@ -1,0 +1,20 @@
+name: Publish Shopware Docker image to Docker Hub
+on: [push]
+
+jobs:
+    build:
+        name: Publish
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Composer install
+              uses: docker://composer:1.9.1
+              with:
+                  args: install --ignore-platform-reqs
+            - name: Publish to registry
+              uses: HurricanKai/Publish-Docker-Github-Action@master
+              with:
+                  name: fbdo/shopware
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
