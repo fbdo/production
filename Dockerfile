@@ -14,7 +14,6 @@ RUN apk --no-cache add \
         php7-session php7-simplexml php7-tokenizer php7-xml php7-xmlreader php7-xmlwriter \
         php7-zip php7-zlib php7-phar git \
         gnu-libiconv \
-        bash \
     && adduser -u 1000 -D -h $PROJECT_ROOT sw6 sw6 \
     && rm /etc/nginx/conf.d/default.conf
 
